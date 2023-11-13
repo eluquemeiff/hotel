@@ -1,3 +1,7 @@
 from django.shortcuts import render
+from .models import Chambre
 
-# Create your views here.
+
+def vue_hotel(request):
+    chambres = Chambre.objects.all()
+    return render(request, 'hotel/vue_hotel.html', {'chambres': chambres})

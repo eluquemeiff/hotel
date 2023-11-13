@@ -3,13 +3,13 @@ from django.db import models
 
 class Chambre(models.Model):
     id_chambre = models.IntegerField(max_length=100, primary_key=True)
-    occupant = models.ForeignKey("Client", on_delete=models.CASCADE)
+    occupant = models.ForeignKey("Client", on_delete=models.CASCADE, null=True)
     couleur=models.CharField(max_length=100)
     propre=models.BooleanField()
-    photo = models.CharField(max_length=200)
+    photo = models.CharField(max_length=200, null=True)
 
     def __str__(self):
-        return self.id_chambre
+        return str(self.id_chambre)
 
 class Client(models.Model):
     id_client = models.CharField(max_length=100, primary_key=True)
