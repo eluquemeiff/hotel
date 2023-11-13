@@ -2,16 +2,23 @@
 {% load static %}
 
 
-
 {% block content %}
-    <header>
-        <h1><a href="/">Hotel</a></h1>
-    </header>
+<header>
+    <h1><a href="/">Hotel</a></h1>
+</header>
 <ul>
     {% for chambre in chambres %}
-        <li>
-            {{ chambre.id_chambre }} <a href="{% url 'client_detail' id=chambre.occupant.id_client %}"> {{chambre.occupant}}</a>
-        </li>
+    <li>
+        {{ chambre.id_chambre }}
+        {% if chambre.occupant is not null %}
+            <a href="{% url 'client_detail' id=chambre.occupant.id_client %}">{{chambre.occupant}}</a>
+        {% endif %}
+    </li>
     {% endfor %}
 </ul>
+<form method="POST">{% csrf_token %}
+    <b> Changer : </b>
+      {{ form.as_ul }}
+    <button type="submit" class="btn btn-outline-light">OK</button>
+</form>
 {% endblock %}
