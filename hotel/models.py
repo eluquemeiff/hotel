@@ -12,11 +12,11 @@ class Chambre(models.Model):
         return str(self.id_chambre)
 
 class Client(models.Model):
-    id_client = models.CharField(max_length=100, primary_key=True)
+    id_client = models.IntegerField(max_length=100, primary_key=True)
     nom = models.CharField(max_length=20)
     prenom = models.CharField(max_length=20)
     couleur_pref = models.CharField(max_length=20)
-    photo = models.CharField(max_length=200)
+    photo = models.CharField(max_length=200, null=True)
     nb_nuit = models.IntegerField()
     def __str__(self):
         return f"{self.prenom} {self.nom}"

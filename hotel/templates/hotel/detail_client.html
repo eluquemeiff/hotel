@@ -1,0 +1,9 @@
+{% extends 'hotel/base.html' %}
+{% load static %}
+
+{% block content %}
+{{ client.nom }}
+{{ client.prenom }} <br>
+chambre : {{ chambre.id_chambre }} <br>
+nuits restantes : {{client.nb_nuit}}
+{% endblock %}
