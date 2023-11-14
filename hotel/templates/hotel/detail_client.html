@@ -2,8 +2,20 @@
 {% load static %}
 
 {% block content %}
-{{ client.nom }}
-{{ client.prenom }} <br>
-chambre : {{ chambre.id_chambre }} <br>
-nuits restantes : {{client.nb_nuit}}
+
+<div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6 col-12 ">
+        <div class="card">
+            <div class="card-header">
+                <h2 class="text-center">{{ client.prenom }} {{ client.nom }}</h2>
+            </div>
+            <div class="card-body">
+                <p>Préfère les chambres de couleur {{ client.couleur_pref }}.</p>
+                <p>Reste pour encore {{ client.nb_nuit }} dans cette chambre.</p>
+                <p>Bien entendu, préfert les chambres propres à l'arrivée.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
 {% endblock %}

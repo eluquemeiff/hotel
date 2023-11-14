@@ -11,7 +11,7 @@
                 <h2>Réception</h2>
             </div>
             <div class="card-body">
-                <div class="row">
+                <div class="row mb-3">
                     <div class="col-6">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
                             <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3Zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"/>
@@ -23,6 +23,20 @@
                         Voudrait une chambre {{ client.couleur_pref }} pour {{ client.nb_nuit }} nuit{% if client.nb_nuit >= 2 %}s{% endif %}
                     </div>
                 </div>
+
+                {% if messages %}
+                    {% for message in messages %}
+                        {% if message.tags == 'error' %}
+                        <div class="alert alert-danger text-center mb-1" role="alert">
+                            <span>{{ message }}</span>
+                        </div>
+                        {% else %}
+                        <div class="alert alert-success text-center mb-1" role="alert">
+                            <span>{{ message }}</span>
+                        </div>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
             </div>
             <div class="card-footer">
                 <form method="POST">{% csrf_token %}
@@ -82,24 +96,7 @@
     </div>
 </div>
 
-{% if messages %}
-<div class="row">
-    {% for message in messages %}
-    <div class="col">
-        {% if message.tags == 'error' %}
-        <div class="alert alert-danger d-flex text-center" role="alert">
-            {{ message }}
-        </div>
-        {% else %}
-        <div class="alert alert-success d-flex text-center" role="alert">
-            {{ message }}
-            {{ messaage.tags }}
-        </div>
-        {% endif %}
-    </div>
-    {% endfor %}
-</div>
-{% endif %}
+
 
 
 {% endblock %}
