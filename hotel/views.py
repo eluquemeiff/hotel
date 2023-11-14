@@ -4,16 +4,13 @@ from .forms import *
 
 
 def vue_hotel(request):
-    try:
-        client = Client.objects.get(chambre_occupee=None)  # on prend le client à la réception
-    except:
-        client = Client.newClient()
-
     if request.method == "POST":
         if "move" in request.POST:
-            form = MoveForm(request.POST,
-                            instance=client)  # s'il y a qqch dans la requête POST on met ça dans le formulaire et on va l'appliquer au client à la réception
-
+            try:
+                client = Client.objects.get(chambre_occupee=None)  # on prend le client à la réception
+            except:
+                client = Client.newClient()
+            form = MoveForm(request.POST, instance=client)  # s'il y a qqch dans la requête POST on met ça dans le formulaire et on va l'appliquer au client à la réception
             if form.is_valid():  # si le formulaire tient la route, alors on traite le contenu
                 form.save(commit=False)  # on update le client dans le Python mais pas dans la db
                 if client.chambre_occupee:
@@ -52,6 +49,10 @@ def vue_hotel(request):
     passenuitform = PasseNuitForm()
     nettoyerform = NettoyerForm()
     chambres = Chambre.objects.all()
+    try:
+        client = Client.objects.get(chambre_occupee=None)  # on prend le client à la réception
+    except:
+        client = Client.newClient()
 
     return render(request, 'hotel/vue_hotel.html', {'chambres': chambres,
                                                     'moveform': moveform,
