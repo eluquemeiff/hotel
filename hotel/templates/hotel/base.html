@@ -10,15 +10,15 @@
     <link rel="stylesheet" href="{% static 'css/hotel.css' %}">
 </head>
 <body>
-    <nav class="nabar">
-        <div class="container-fluid">
+    <nav class="navbar bg-body-tertiary sticky-top">
+        <div class="container-fluid justify-content-center">
             <a class="navbar-brand" href="/">
                 <h1>Hotel</h1>
             </a>
         </div>
     </nav>
 
-    <div class="container">
+    <div class="container my-5">
         {% block content %}
         {% endblock %}
     </div>

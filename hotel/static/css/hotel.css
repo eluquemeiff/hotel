@@ -1,18 +1,10 @@
-body {
-    background-color: black;
-    color : #ccc;
-}
-.card {
-    background-color: #111;
-    color: #ccc;
+[data-bs-theme=dark] {
+    --bs-body-bg: dark;
 }
 h2 {
-    color: #939F5C;
     font-family: 'Lobster';
 }
-nav{
-    background-color: #313715;
-}
+
 .navbar-brand{
     color: #C25100; font-family: 'Lobster';
 }
