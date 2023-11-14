@@ -12,7 +12,7 @@
 {{ client.couleur_pref }} <br/>
 <form method="POST">{% csrf_token %}
     <b> Changer : </b>
-      {{ moveForm.as_ul }}
+    {{ moveform.as_ul }}
     <button type="submit" class="btn btn-outline-light" name="move">OK</button>
 </form>
 
@@ -21,11 +21,20 @@
     <li>
         {{ chambre.id_chambre }}
         {{ chambre.couleur }}
+        {% if not chambre.propre %}
+        <form method="post">{% csrf_token %}
+            <input type="hidden" name="nettoyer" value="{{ chambre.id_chambre }}">
+            <button type="submit" class="btn btn-outline-light">Nettoyer</button>
+        </form>
+        {% endif %}
         {% if chambre.occupant is not null %}
-            <a href="{% url 'client_detail' id=chambre.occupant.id_client %}">{{chambre.occupant}}</a>
+        <a href="{% url 'client_detail' id=chambre.occupant.id_client %}">{{ chambre.occupant }}</a>
         {% endif %}
     </li>
     {% endfor %}
 </ul>
 
+<form method="post">{% csrf_token %}
+    <button type="submit" class="btn btn-outline-light" name="passeNuit">Passer une nuit</button>
+</form>
 {% endblock %}

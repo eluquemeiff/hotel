@@ -1,4 +1,5 @@
 from django.db import models
+from random import randint
 
 
 class Chambre(models.Model):
@@ -22,3 +23,44 @@ class Client(models.Model):
     def __str__(self):
         return f"{self.prenom} {self.nom}"
 
+    @classmethod
+    def newClient(cls):
+        noms_de_famille = [
+            "Smith", "Johnson", "Williams", "Jones", "Brown",
+            "Davis", "Miller", "Wilson", "Moore", "Taylor",
+            "Anderson", "Thomas", "Jackson", "White", "Harris",
+            "Martin", "Thompson", "Garcia", "Martinez", "Robinson",
+            "Clark", "Rodriguez", "Lewis", "Lee", "Walker",
+            "Hall", "Allen", "Young", "Hernandez", "King",
+            "Wright", "Lopez", "Hill", "Scott", "Green",
+            "Adams", "Baker", "Nelson", "Carter", "Mitchell",
+            "Perez", "Roberts", "Turner", "Phillips", "Campbell",
+            "Parker", "Evans", "Edwards", "Collins", "Stewart"
+        ]
+        prenoms = [
+            "John", "Jane", "Robert", "Emily", "Michael",
+            "Emma", "David", "Olivia", "Christopher", "Sophia",
+            "Matthew", "Ava", "Andrew", "Isabella", "Daniel",
+            "Mia", "William", "Abigail", "Ethan", "Ella",
+            "Joseph", "Madison", "James", "Liam", "Benjamin",
+            "Grace", "Logan", "Harper", "Ryan", "Aiden",
+            "Oliver", "Avery", "Jack", "Scarlett", "Alexander",
+            "Chloe", "Henry", "Sofia", "Sebastian", "Evelyn",
+            "Samuel", "Victoria", "Nathan", "Lily", "Daniel",
+            "Hannah", "Nicholas", "Aria", "Caleb", "Grace"
+        ]
+        couleurs = ["jaune", "bleu", "vert", "rouge"]
+        nom = noms_de_famille[randint(0, 49)]
+        prenom = prenoms[randint(0, 49)]
+        couleur = couleurs[randint(0, 3)]
+        nbNuit = randint(1, 10)
+        id = Client.objects.aggregate(max_attribut=models.Max('id_client'))['max_attribut']  # nouveau id = 1+ max ancien client
+        if id == None:
+            id = 0
+        id += 1
+
+        return Client.objects.create(id_client=id,
+                                          nom=nom,
+                                          prenom=prenom,
+                                          couleur_pref=couleur,
+                                          nb_nuit=nbNuit)
