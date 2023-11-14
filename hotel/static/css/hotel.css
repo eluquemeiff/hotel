@@ -8,3 +8,6 @@ h2 {
 .navbar-brand{
     color: #C25100; font-family: 'Lobster';
 }
+nav {
+    background-color: hsl(351, 40%, 70%);
+}

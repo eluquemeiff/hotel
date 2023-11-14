@@ -3,24 +3,30 @@
 
 
 {% block content %}
+<div class="row ">
+    <div class="d-flex flex-row-reverse">
+        <form method="post">{% csrf_token %}
+            <button type="submit" class="btn btn-outline-light" name="passeNuit">Passer une nuit</button>
+        </form>
+    </div>
+</div>
 
 <div class="row justify-content-center">
-    <div class="col-lg-6 col-md-9 col">
+    <div class="col-lg-6 col-md-9 col-12">
         <div class="card">
-            <div class="card-header">
-                <h2>Réception</h2>
+            <div class="card-header d-flex justify-content-between">
+                <h2 class="align-self-center">Réception</h2>
+                <img src="{% static 'img/reception1.svg' %}" height="100rem">
             </div>
             <div class="card-body">
                 <div class="row mb-3">
                     <div class="col-6">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
-                            <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3Zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"/>
-                        </svg>
+                        <img src="{% static client.photo %}" height="150rem">
                     </div>
                     <div class="col-6">
                         {{ client.prenom }}
                         {{ client.nom }}
-                        Voudrait une chambre {{ client.couleur_pref }} pour {{ client.nb_nuit }} nuit{% if client.nb_nuit >= 2 %}s{% endif %}
+                        Voudrait une chambre {{ client.couleur_pref }} pour {{ client.nb_nuit }} nuit{% if client.nb_nuit >= 2 %}s{% endif %}.
                     </div>
                 </div>
 
@@ -49,38 +55,37 @@
     </div>
 </div>
 
-<div class="row row-col-lg-3 row-col-md-2 row-col-sm-1 my-5">
+<div class="row my-5 g-3">
     {% for chambre in chambres %}
-    <div class="col">
+    <div class="col-lg-4 col-md-6 col-12">
         <div class="card">
         <div class="card-header">
-            Chambre nº{{ chambre.id_chambre }} {{ chambre.couleur }}
+            Chambre nº{{ chambre.id_chambre }}
         </div>
         <div class="card-body">
             <div class="row">
                 <div class="col">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-door-closed" viewBox="0 0 16 16">
-                        <path d="M3 2a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v13h1.5a.5.5 0 0 1 0 1h-13a.5.5 0 0 1 0-1H3V2zm1 13h8V2H4v13z"/>
-                        <path d="M9 9a1 1 0 1 0 2 0 1 1 0 0 0-2 0z"/>
-                    </svg>
+                    <img src="{% static chambre.photo %}" height="150rem">
                 </div>
+
+                {% if chambre.occupant is not null %}
                 <div class="col">
-                    {% if chambre.occupant is not null %}
                     <a href="{% url 'client_detail' id=chambre.occupant.id_client %}">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="80%"  fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
                             <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3Zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"/>
                         </svg>
                     </a>
-                    {% endif %}
                 </div>
+                {% endif %}
+
+                {% if not chambre.propre %}
                 <div class="col">
-                    {% if not chambre.propre %}
                     <form method="post">{% csrf_token %}
                         <input type="hidden" name="nettoyer" value="{{ chambre.id_chambre }}">
                         <button type="submit" class="btn btn-outline-light">Nettoyer</button>
                     </form>
-                    {% endif %}
                 </div>
+                {% endif %}
             </div>
         </div>
     </div>
@@ -88,13 +93,7 @@
     {% endfor %}
 </div>
 
-<div class="row ">
-    <div class="d-flex justify-content-center">
-        <form method="post">{% csrf_token %}
-            <button type="submit" class="btn btn-outline-light" name="passeNuit">Passer une nuit</button>
-        </form>
-    </div>
-</div>
+
 
 
 

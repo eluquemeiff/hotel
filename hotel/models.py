@@ -54,13 +54,16 @@ class Client(models.Model):
         prenom = prenoms[randint(0, 49)]
         couleur = couleurs[randint(0, 3)]
         nbNuit = randint(1, 10)
+        photo = f"img/voyageur{randint(1,4)}.svg"
         id = Client.objects.aggregate(max_attribut=models.Max('id_client'))['max_attribut']  # nouveau id = 1+ max ancien client
         if id == None:
             id = 0
         id += 1
 
         return Client.objects.create(id_client=id,
-                                          nom=nom,
-                                          prenom=prenom,
-                                          couleur_pref=couleur,
-                                          nb_nuit=nbNuit)
+                                     nom=nom,
+                                     prenom=prenom,
+                                     couleur_pref=couleur,
+                                     nb_nuit=nbNuit,
+                                     photo=photo,
+                                     )
