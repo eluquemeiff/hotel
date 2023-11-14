@@ -1,8 +1,15 @@
 from django import forms
-from .models import Chambre
+from .models import Client
 
 
 class MoveForm(forms.ModelForm):
     class Meta:
-        model = Chambre
-        fields = ('id_chambre',)
+        model = Client
+        fields = ('chambre_occupee',)  # on affecte une chambre au client pommé
+
+
+class PasseNuitForm(forms.Form):  # on fait un forme qui n'a aucun champ
+    pass
+
+class NettoyerForm(forms.Form):
+    pass

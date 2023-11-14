@@ -6,19 +6,26 @@
 <header>
     <h1><a href="/">Hotel</a></h1>
 </header>
+
+<h2>Réception</h2>
+{{ client.nom}} {{ client.prenom }} <br/>
+{{ client.couleur_pref }} <br/>
+<form method="POST">{% csrf_token %}
+    <b> Changer : </b>
+      {{ moveForm.as_ul }}
+    <button type="submit" class="btn btn-outline-light" name="move">OK</button>
+</form>
+
 <ul>
     {% for chambre in chambres %}
     <li>
         {{ chambre.id_chambre }}
+        {{ chambre.couleur }}
         {% if chambre.occupant is not null %}
             <a href="{% url 'client_detail' id=chambre.occupant.id_client %}">{{chambre.occupant}}</a>
         {% endif %}
     </li>
     {% endfor %}
 </ul>
-<form method="POST">{% csrf_token %}
-    <b> Changer : </b>
-      {{ form.as_ul }}
-    <button type="submit" class="btn btn-outline-light">OK</button>
-</form>
+
 {% endblock %}
