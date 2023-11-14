@@ -49,7 +49,7 @@ class Client(models.Model):
             "Samuel", "Victoria", "Nathan", "Lily", "Daniel",
             "Hannah", "Nicholas", "Aria", "Caleb", "Grace"
         ]
-        couleurs = ["jaune", "bleu", "vert", "rouge"]
+        couleurs = ["jaune", "bleue", "verte", "rouge"]
         nom = noms_de_famille[randint(0, 49)]
         prenom = prenoms[randint(0, 49)]
         couleur = couleurs[randint(0, 3)]

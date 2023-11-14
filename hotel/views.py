@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from .models import Chambre, Client
 from .forms import *
+from django.contrib import messages
 
 
 def vue_hotel(request):
@@ -15,11 +16,20 @@ def vue_hotel(request):
                 form.save(commit=False)  # on update le client dans le Python mais pas dans la db
                 if client.chambre_occupee:
                     chambre = Chambre.objects.get(id_chambre=client.chambre_occupee.id_chambre)
-                    if (chambre.occupant is None) and chambre.propre and (client.couleur_pref == chambre.couleur):
-                        chambre.occupant = client
-                        client.save()
-                        chambre.save()
-                        Client.newClient().save()  # utilisation de la fonction de classe de la classe Client dans le fichier models.py
+                    if chambre.occupant is None:
+                        if chambre.propre:
+                            if client.couleur_pref == chambre.couleur:
+                                chambre.occupant = client
+                                client.save()
+                                chambre.save()
+                                Client.newClient().save()  # utilisation de la fonction de classe de la classe Client dans le fichier models.py
+                                messages.success(request, f"{client.prenom} {client.nom} va dans la chambre {client.chambre_occupee}")
+                            else:
+                                messages.error(request, f"La couleur de la chambre nº{chambre.id_chambre} ne convient pas à {client.prenom} {client.nom}")
+                        else:
+                            messages.error(request, "La chambre n'a pas encore été nettoyée")
+                    else:
+                        messages.error(request, f"Il y a quelqu'un dans la chambre nº{chambre.id_chambre}")
 
         elif "passeNuit" in request.POST:
             if PasseNuitForm(request.POST).is_valid():

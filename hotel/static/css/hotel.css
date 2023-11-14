@@ -1,6 +1,18 @@
-h1 a, h2 a { color: #C25100; }
-h1 a, h2 a { color: #C25100; font-family: 'Lobster'; }
 body {
-    padding-left: 15px;
-    background-color: aqua;
+    background-color: black;
+    color : #ccc;
+}
+.card {
+    background-color: #111;
+    color: #ccc;
+}
+h2 {
+    color: #939F5C;
+    font-family: 'Lobster';
+}
+nav{
+    background-color: #313715;
+}
+.navbar-brand{
+    color: #C25100; font-family: 'Lobster';
 }
