@@ -1,0 +1,32 @@
+{% extends 'hotel/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="mb-3">
+    <a href="{% url 'vue_hotel' %}">
+        <button type="button" class="btn btn-outline-light">
+            Retour
+        </button>
+    </a>
+</div>
+<div class="container">
+<h2>Règles du jeu</h2>
+<p>
+   <h3>But du jeu :</h3>
+   Affecter les bonnes chambres aux bons clients
+</p>
+<p>
+   <h3>Comment faire ?</h3>
+   Quand un client arrive à la réception il fait une demande de chambre particulière pour un certains nombre de nuits.<br/>
+   À l'aide du menu déroulant placer le dans la bonne chambre. <br/>
+   Une fois le client dans sa chambre un nouveau client arrive il faut donc le placer lui aussi dans sa chambre.<br/>
+   Si toutes les chambres sont attribué ou que la chambre que demande le client n'est pas disponible passez une nuit (à l'aide du bouton situé en haut à gauche) et un nouveau client arrivera.<br/>
+   Une fois que le client quitte sa chambre il faut la nettoyée (en cliquant sur le bouton nettoyer de la chambre) avant de pouvoir raffecter la chambre à un autre client.<br/>
+</p>
+
+<div class="d-flex justify-content-center">
+   <h3>Vous avez toutes les clés, maintenant à vous de jouer!</h3>
+</div>
+</div>
+
+{% endblock %}

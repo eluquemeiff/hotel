@@ -76,3 +76,7 @@ def client_detail(request, id):
     client = Client.objects.get(id_client=id)
     chambre = Chambre.objects.get(occupant=client)
     return render(request, 'hotel/detail_client.html', {'client': client, 'chambre': chambre})
+
+
+def help(request):
+    return render(request, 'hotel/help.html')

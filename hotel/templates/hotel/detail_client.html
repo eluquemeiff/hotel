@@ -2,25 +2,34 @@
 {% load static %}
 
 {% block content %}
+<div class="float-start">
+    <a href="{% url 'vue_hotel' %}">
+        <button type="button" class="btn btn-outline-light">
+            Retour
+        </button>
+    </a>
+</div>
 
-<div class="row justify-content-center">
-    <div class="col-md-10 col-lg-8 col-12 ">
-        <div class="card">
-            <div class="card-header">
-                <h2 class="text-center">{{ client.prenom }} {{ client.nom }}</h2>
-            </div>
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-4">
-                        <img src="{% static client.photo %}" width="150rem">
-                    </div>
-                    <div class="col">
-                        <p>Préfère les chambres de couleur {{ client.couleur_pref }}.</p>
-                        <p>Reste pour encore {{ client.nb_nuit }} nuit{% if client.nb_nuit >= 2 %}s{% endif %} dans cette chambre.</p>
-                        <p>Bien entendu, préfere les chambres propres à l'arrivée.</p>
-                    </div>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-10 col-lg-8 col-12 ">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="text-center">{{ client.prenom }} {{ client.nom }}</h2>
                 </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-4">
+                            <img src="{% static client.photo %}" width="150rem">
+                        </div>
+                        <div class="col">
+                            <p>Préfère les chambres de couleur {{ client.couleur_pref }}.</p>
+                            <p>Reste pour encore {{ client.nb_nuit }} nuit{% if client.nb_nuit >= 2 %}s{% endif %} dans cette chambre.</p>
+                            <p>Bien entendu, préfere les chambres propres à l'arrivée.</p>
+                        </div>
+                    </div>
 
+                </div>
             </div>
         </div>
     </div>
